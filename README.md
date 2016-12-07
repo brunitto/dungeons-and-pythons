@@ -136,9 +136,9 @@ Go to Dungeon 2.
 
 ## Issues
 
-[https://github.com/brunitto/dungeons-and-pythons/issues]
+https://github.com/brunitto/dungeons-and-pythons/issues
 
 ## Contribute
 
-[https://github.com/brunitto/dungeons-and-pythons]
+https://github.com/brunitto/dungeons-and-pythons
 
