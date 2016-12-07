@@ -3,7 +3,7 @@
 Explore dungeons, fight monsters and avoid traps.
 
 This is a simple RPG game written in python, as defined in exercise 36 at
-[Learn Python the Hard Way](https://learnpythonthehardway.org/book/ex36.html)
+[Learn Python the Hard Way](https://learnpythonthehardway.org/book/ex36.html).
 
 ## Features
 
