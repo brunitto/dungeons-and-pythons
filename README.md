@@ -55,7 +55,7 @@ take an action.
     1 - Open the left door
     2 - Open the right door
 
-### Battles screen
+### Battle screen
 
 In battles, you can attack or defend.
 
@@ -85,7 +85,9 @@ No one listens to you, you are on your own.
 
 2 - Check the guard body
 
-You find the cell key in his pocket. You can leave the cell. Go to room 2.
+You find the cell key in his pocket. You can leave the cell.
+
+Go to room 2.
 
 #### Room 2
 
@@ -141,4 +143,3 @@ https://github.com/brunitto/dungeons-and-pythons/issues
 ## Contribute
 
 https://github.com/brunitto/dungeons-and-pythons
-
