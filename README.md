@@ -85,7 +85,7 @@ No one listens to you, you are on your own.
 
 2 - Check the guard body
 
-You find the cell key in his pocket. You can leave the cell.
+You find the cell key in his pocket. You leave the cell.
 
 Go to room 2.
 
@@ -99,11 +99,6 @@ a long corridor on the left...
 Go to Room 3.
 
 2 - Run through the corridor on the left
-
-You run as fast as you can through the corridor. You can hear the sounds of a
-heat battle nearby. You enter the only door available at the end of the
-corridor, and it looks like the main hall, with a huge half open port at the
-end of it. You can feel a weak breeze and the sound of the external world...
 
 Go to Room 4
 
@@ -127,14 +122,35 @@ big axe at you, time to battle...
 
 Ugly Orc, HP: 10, AP: 2, DP: 2, GP: 4
 
+On win:
+
 Go to Room 5.
+
+On loss:
+
+GAME OVER
 
 #### Room 5
 
 After a heat battle, you still have energy to run. At the end of the hall,
-you enter the half opened port and can see the light again...
+there is a dark corridor. When you enter it, you notice that part of the floor
+looks different...
+
+1 - Check for traps
+
+You find a trap, a clumsy deep hole full of pythons. You jump over it.
 
 Go to Dungeon 2.
+
+2 - Run like there is no tomorrow
+
+You fall in a deep hole and get bitten by the pythons.
+
+GAME OVER
+
+### Dungeon 2
+
+TODO create another cool dungeon
 
 ## Issues
 
