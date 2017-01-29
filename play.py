@@ -1,5 +1,6 @@
-from sys import exit
 import os
+import sys
+import time
 
 # TODO use a module to import common functions
 # TODO use lists
@@ -22,7 +23,7 @@ def room_1():
     print_room_description(
         "You wake up in a dark and dry room. You look around and it's looks\n"
         "like a cell. Right in front of you, close to the cell bars, there is\n"
-        "a guard, drop dead..."
+        "a guard, drop dead...\n"
     )
     print_room_options([
         "Scream for help",
@@ -177,19 +178,27 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def print_room_description(description):
-    print "DM: %s\n" % description
+    print_slowly(description)
 
 def print_room_options(options):
     options_counter = 1
+    print
     for option in options:
         print "%s - %s" % (options_counter, option)
         options_counter += 1
-    print ""
+    print
 
 def print_room_notice(notice):
     clear_screen()
-    print "%s\n" % (notice)
+    print_slowly(notice)
+    print
     raw_input("Press any key to continue...")
+
+def print_slowly(message):
+    for offset in range(0, len(message)):
+        time.sleep(0.06)
+        sys.stdout.write(message[offset])
+        sys.stdout.flush()
 
 def start():
     global session_player_name, session_player_hp, session_player_ap, session_player_dp, session_player_gp
