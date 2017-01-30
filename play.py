@@ -23,7 +23,7 @@ def room_1():
     print_room_description(
         "You wake up in a dark and dry room. You look around and it's looks\n"
         "like a cell. Right in front of you, close to the cell bars, there is\n"
-        "a guard, drop dead...\n"
+        "a guard, drop dead..."
     )
     print_room_options([
         "Scream for help",
@@ -156,7 +156,7 @@ def print_general_screen():
         "DUNGEONS AND PYTHONS\n"
         "--------------------------------------------------------------------------------\n"
         "Dungeon: %s, Room: %s\n"
-        "Player: %s, HP: %s, AP: %s, DP: %s, GP: %s\n"
+        "Player: %s, HP: %s, AP: %s, DP: %s, GP: %s"
     ) % (
         session_dungeon,
         session_room,
@@ -171,18 +171,22 @@ def print_battle_screen():
     print ""
 
 def game_over():
-    print "GAME OVER!\n"
+    print
+    print "GAME OVER!"
+    print
     exit(1)
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def print_room_description(description):
+    print
     print_slowly(description)
+    print
 
 def print_room_options(options):
-    options_counter = 1
     print
+    options_counter = 1
     for option in options:
         print "%s - %s" % (options_counter, option)
         options_counter += 1
@@ -196,7 +200,7 @@ def print_room_notice(notice):
 
 def print_slowly(message):
     for offset in range(0, len(message)):
-        time.sleep(0.06)
+        time.sleep(0.04)
         sys.stdout.write(message[offset])
         sys.stdout.flush()
 
