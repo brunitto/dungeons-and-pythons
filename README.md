@@ -24,12 +24,20 @@ TODO define a quickstart guide
 
 ## Battle system
 
+To attack:
+
 1. Rolls a D6 (a random value between 1 and 6)
 2. Add the player/monster attack points
-3. Subtract the playermonster defense points
+3. Subtract the player/monster defense points
 4. Calculate the damage, apply to the player/monster HP
 5. If player HP < 1, game over
 6. If monster HP < 1, victory
+
+To defend:
+
+1. Rolls a D6 (a random value between 1 and 6)
+2. Add the player/monster defense points
+3. This defense points are valid until the next turn
 
 ## Console layout
 

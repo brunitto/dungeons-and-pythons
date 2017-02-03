@@ -1,18 +1,25 @@
 import os
 import sys
 import time
+import random
 
 # TODO use a module to import common functions
 # TODO use lists
 # TODO do not use global variables
+# TODO remove empty prints
 
 session_dungeon = "--"
 session_room = "--"
-session_player_name = "--"
-session_player_hp = "--"
-session_player_ap = "--"
-session_player_dp = "--"
-session_player_gp = "--"
+session_player_name = "PLAYER"
+session_player_hp = 0
+session_player_ap = 0
+session_player_dp = 0
+session_player_gp = 0
+session_monster_name = "MONSTER"
+session_monster_hp = 0
+session_monster_ap = 0
+session_monster_dp = 0
+session_monster_gp = 0
 
 def room_1():
     global session_dungeon, session_room
@@ -113,8 +120,7 @@ def room_4():
         "You enter the main hall. You fell a huge shade coming from nowhere\n"
         "weaving a big axe at you, time to battle"
     )
-    print_room_notice("The battle system is not available")
-    room_5()
+    battle_1()
 
 def room_5():
     global session_dungeon, session_room
@@ -151,6 +157,85 @@ def room_5():
         else:
             print "Choose a valid option"
 
+def battle_1():
+    global session_player_hp, session_player_ap, session_player_dp, \
+        session_player_gp, session_monster_hp, session_monster_ap, \
+        session_monster_dp, session_monster_gp
+    turn = "player"
+    player_defense = 0
+    monster_defense = 0
+    while session_monster_hp > 0 and session_player_hp > 0:
+        clear_screen()
+        print_general_screen()
+        print_battle_screen()
+        if turn == "player":
+            dice = rolls_dice()
+            option = ""
+            while option != "q":
+                print
+                print "1 - Attack"
+                print "2 - Defend"
+                print
+                option = raw_input("Choose an option (q to quit): ")
+                if option == "1":
+                    if monster_defense > 0:
+                        damage = (dice + session_player_ap) - (session_monster_dp + monster_defense)
+                    else:
+                        damage = (dice + session_player_ap) - session_monster_dp
+                    if damage < 0:
+                        damage = 0
+                    print "Player attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                    raw_input("Press any key to continue...")
+                    session_monster_hp = session_monster_hp - damage
+                    player_defense = 0
+                    turn = "monster"
+                    break
+                elif option == "2":
+                    player_defense = dice + session_player_dp
+                    print "Player defends, rolls %s, getting %s of defense" % (dice, player_defense)
+                    raw_input("Press any key to continue...")
+                    turn = "monster"
+                    break
+                else:
+                    print "Choose a valid option"
+        elif turn == "monster":
+            print "monster turn"
+            dice = rolls_dice()
+            option = random.choice(["1", "2"])
+            if option == "1":
+                if player_defense > 0:
+                    damage = (dice + session_monster_ap) - (session_player_dp + player_defense)
+                else:
+                    damage = (dice + session_monster_ap) - session_player_dp
+                if damage < 0:
+                    damage = 0
+                print "Monster attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                raw_input("Press any key to continue...")
+                session_player_hp = session_player_hp - damage
+                monster_defense = 0
+                turn = "player"
+            elif option == "2":
+                monster_defense = dice + session_monster_dp
+                print "Monster defends, rolls %s, getting %s of defense" % (dice, monster_defense)
+                raw_input("Press any key to continue...")
+                turn = "player"
+            else:
+                bug("Unknown monster action")
+        else:
+            bug("Unknown turn")
+
+        if session_monster_hp <= 0:
+            print "You won!"
+            raw_input("Press any key to continue...")
+            session_player_gp = session_player_gp + session_monster_gp
+            room_5()
+        elif session_player_hp <= 0:
+            print "You died!"
+            raw_input("Press any key to continue...")
+            game_over()
+        else:
+            continue
+
 def print_general_screen():
     print (
         "DUNGEONS AND PYTHONS\n"
@@ -168,7 +253,15 @@ def print_general_screen():
     )
 
 def print_battle_screen():
-    print ""
+    print (
+        "Monster: %s, HP: %s, AP: %s, DP: %s, GP: %s"
+    ) % (
+        session_monster_name,
+        session_monster_hp,
+        session_monster_ap,
+        session_monster_dp,
+        session_monster_gp
+    )
 
 def game_over():
     print
@@ -176,12 +269,19 @@ def game_over():
     print
     exit(1)
 
+def bug(message):
+    print message
+    exit(1)
+
+def rolls_dice():
+    return random.randint(1, 6)
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def print_room_description(description):
     print
-    print_slowly(description)
+    print_smoothly(description)
     print
 
 def print_room_options(options):
@@ -194,24 +294,33 @@ def print_room_options(options):
 
 def print_room_notice(notice):
     clear_screen()
-    print_slowly(notice)
+    print_smoothly(notice)
     print
     raw_input("Press any key to continue...")
 
-def print_slowly(message):
-    for offset in range(0, len(message)):
-        time.sleep(0.04)
-        sys.stdout.write(message[offset])
-        sys.stdout.flush()
+def print_smoothly(message):
+    print message
+    # for offset in range(0, len(message)):
+    #     time.sleep(0.04)
+    #     sys.stdout.write(message[offset])
+    #     sys.stdout.flush()
 
 def start():
-    global session_player_name, session_player_hp, session_player_ap, session_player_dp, session_player_gp
+    global session_player_name, session_player_hp, session_player_ap, \
+        session_player_dp, session_player_gp, session_monster_name, \
+        session_monster_hp, session_monster_ap, session_monster_dp, \
+        session_monster_gp
     print "Welcome to Dungeons and Pythons\n"
     session_player_name = raw_input("What's your name? ")
-    session_player_hp = 10
+    session_player_hp = 8
     session_player_ap = 2
     session_player_dp = 2
     session_player_gp = 0
+    session_monster_name = "Ugly Orc"
+    session_monster_hp = 4
+    session_monster_ap = 1
+    session_monster_dp = 1
+    session_monster_gp = 2
     room_1()
 
 start()
