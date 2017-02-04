@@ -41,9 +41,11 @@ def room_1():
     while option != "q":
         option = raw_input("Choose an option (q to quit): ")
         if option == "1":
+            clear_screen()
             print_room_notice("No one listens to you, you are on your own.")
             room_1()
         elif option == "2":
+            clear_screen()
             print_room_notice(
                 "You find the cell key in his pocket. You leave the cell"
             )
@@ -51,7 +53,7 @@ def room_1():
         elif option == "q":
             game_over()
         else:
-            print "Choose a valid option"
+            print_error("Choose a valid option")
 
 def room_2():
     global session_dungeon, session_room
@@ -78,7 +80,7 @@ def room_2():
         elif option == "q":
             game_over()
         else:
-            print "Choose a valid option"
+            print_error("Choose a valid option")
 
 def room_3():
     global session_dungeon, session_room
@@ -101,6 +103,7 @@ def room_3():
         if option == "1":
             global session_player_gp
             session_player_gp += 2
+            clear_screen()
             print_room_notice("You found 2GP")
             room_3()
         elif option == "2":
@@ -108,7 +111,7 @@ def room_3():
         elif option == "q":
             game_over()
         else:
-            print "Choose a valid option"
+            print_error("Choose a valid option")
 
 def room_4():
     global session_dungeon, session_room
@@ -142,12 +145,14 @@ def room_5():
     while option != "q":
         option = raw_input("Choose an option (q to quit): ")
         if option == "1":
+            clear_screen()
             print_room_notice(
                 "You find a trap, a clumsy deep hole full of pythons. You jump "
                 "over it."
             )
             game_over()
         elif option == "2":
+            clear_screen()
             print_room_notice(
                 "You fall in a deep hole and get bitten by the pythons."
             )
@@ -155,7 +160,7 @@ def room_5():
         elif option == "q":
             game_over()
         else:
-            print "Choose a valid option"
+            print_error("Choose a valid option")
 
 def battle_1():
     global session_player_hp, session_player_ap, session_player_dp, \
@@ -172,10 +177,10 @@ def battle_1():
             dice = rolls_dice()
             option = ""
             while option != "q":
-                print
-                print "1 - Attack"
-                print "2 - Defend"
-                print
+                print_battle_options([
+                    "Attack",
+                    "Defend"
+                ])
                 option = raw_input("Choose an option (q to quit): ")
                 if option == "1":
                     if monster_defense > 0:
@@ -184,7 +189,12 @@ def battle_1():
                         damage = (dice + session_player_ap) - session_monster_dp
                     if damage < 0:
                         damage = 0
-                    print "Player attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                    clear_screen()
+                    print_general_screen()
+                    print_battle_screen()
+                    print_battle_info(
+                        "Player attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                    )
                     raw_input("Press any key to continue...")
                     session_monster_hp = session_monster_hp - damage
                     player_defense = 0
@@ -192,14 +202,18 @@ def battle_1():
                     break
                 elif option == "2":
                     player_defense = dice + session_player_dp
-                    print "Player defends, rolls %s, getting %s of defense" % (dice, player_defense)
+                    clear_screen()
+                    print_general_screen()
+                    print_battle_screen()
+                    print_battle_info(
+                        "Player defends, rolls %s, getting %s of defense" % (dice, player_defense)
+                    )
                     raw_input("Press any key to continue...")
                     turn = "monster"
                     break
                 else:
-                    print "Choose a valid option"
+                    print_error("Choose a valid option")
         elif turn == "monster":
-            print "monster turn"
             dice = rolls_dice()
             option = random.choice(["1", "2"])
             if option == "1":
@@ -209,29 +223,38 @@ def battle_1():
                     damage = (dice + session_monster_ap) - session_player_dp
                 if damage < 0:
                     damage = 0
-                print "Monster attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                clear_screen()
+                print_general_screen()
+                print_battle_screen()
+                print_battle_info(
+                    "Monster attacks, rolls %s, dealing %s of damage" % (dice, damage)
+                )
                 raw_input("Press any key to continue...")
                 session_player_hp = session_player_hp - damage
                 monster_defense = 0
                 turn = "player"
             elif option == "2":
                 monster_defense = dice + session_monster_dp
-                print "Monster defends, rolls %s, getting %s of defense" % (dice, monster_defense)
+                clear_screen()
+                print_general_screen()
+                print_battle_screen()
+                print_battle_info(
+                    "Monster defends, rolls %s, getting %s of defense" % (dice, monster_defense)
+                )
                 raw_input("Press any key to continue...")
                 turn = "player"
             else:
-                bug("Unknown monster action")
+                print_error("Unknown monster action")
         else:
-            bug("Unknown turn")
+            print_error("Unknown turn")
 
         if session_monster_hp <= 0:
-            print "You won!"
-            raw_input("Press any key to continue...")
+            print_room_notice("You won!")
+            print_room_notice("You found %sGP" % session_monster_gp)
             session_player_gp = session_player_gp + session_monster_gp
             room_5()
         elif session_player_hp <= 0:
-            print "You died!"
-            raw_input("Press any key to continue...")
+            print_room_notice("You died!")
             game_over()
         else:
             continue
@@ -264,13 +287,7 @@ def print_battle_screen():
     )
 
 def game_over():
-    print
     print "GAME OVER!"
-    print
-    exit(1)
-
-def bug(message):
-    print message
     exit(1)
 
 def rolls_dice():
@@ -280,22 +297,17 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def print_room_description(description):
-    print
     print_smoothly(description)
-    print
 
 def print_room_options(options):
-    print
     options_counter = 1
     for option in options:
         print "%s - %s" % (options_counter, option)
         options_counter += 1
-    print
 
 def print_room_notice(notice):
     clear_screen()
     print_smoothly(notice)
-    print
     raw_input("Press any key to continue...")
 
 def print_smoothly(message):
@@ -304,6 +316,20 @@ def print_smoothly(message):
     #     time.sleep(0.04)
     #     sys.stdout.write(message[offset])
     #     sys.stdout.flush()
+
+def print_error(error):
+    print error
+    sys.exit(1)
+
+def print_battle_info(info):
+    print info
+
+# TODO DRY
+def print_battle_options(options):
+    options_counter = 1
+    for option in options:
+        print "%s - %s" % (options_counter, option)
+        options_counter += 1
 
 def start():
     global session_player_name, session_player_hp, session_player_ap, \

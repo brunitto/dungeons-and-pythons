@@ -20,7 +20,11 @@ points (DP) and gold pieces (GP)
 
 ## How to play
 
-TODO define a quickstart guide
+To start the game:
+
+1. Clone this project
+2. Change the working directory to the cloned directory
+3. Execute `python play.py`
 
 ## Battle system
 
