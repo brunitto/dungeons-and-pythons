@@ -274,6 +274,7 @@ def print_general_screen():
         session_player_dp,
         session_player_gp
     )
+    print
 
 def print_battle_screen():
     print (
@@ -285,9 +286,11 @@ def print_battle_screen():
         session_monster_dp,
         session_monster_gp
     )
+    print
 
 def game_over():
     print "GAME OVER!"
+    print
     exit(1)
 
 def rolls_dice():
@@ -298,12 +301,14 @@ def clear_screen():
 
 def print_room_description(description):
     print_smoothly(description)
+    print
 
 def print_room_options(options):
     options_counter = 1
     for option in options:
         print "%s - %s" % (options_counter, option)
         options_counter += 1
+    print
 
 def print_room_notice(notice):
     clear_screen()
@@ -319,10 +324,12 @@ def print_smoothly(message):
 
 def print_error(error):
     print error
+    print
     sys.exit(1)
 
 def print_battle_info(info):
     print info
+    print
 
 # TODO DRY
 def print_battle_options(options):
@@ -330,12 +337,14 @@ def print_battle_options(options):
     for option in options:
         print "%s - %s" % (options_counter, option)
         options_counter += 1
+    print
 
 def start():
     global session_player_name, session_player_hp, session_player_ap, \
         session_player_dp, session_player_gp, session_monster_name, \
         session_monster_hp, session_monster_ap, session_monster_dp, \
         session_monster_gp
+    clear_screen()
     print "Welcome to Dungeons and Pythons\n"
     session_player_name = raw_input("What's your name? ")
     session_player_hp = 8
