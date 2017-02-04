@@ -73,7 +73,7 @@ In battles, you can attack or defend.
 
     Monster: Ugly Orc, HP: --, AP: --, DP: --
 
-    Player/Monster attacks, rolls --, dealing -- of damage!
+    Player/Monster attacks/defends, rolls --, dealing/getting -- of damage/defense!
 
     1 - Attack
     2 - Defend
