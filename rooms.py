@@ -11,7 +11,7 @@ def render_room_1():
     screen.print_room_description(
         "You wake up in a dark and dry room. You look around and it's looks\n"
         "like a cell. Right in front of you, close to the cell bars, there is\n"
-        "a guard, drop dead..."
+        "a guard, drop dead"
     )
     screen.print_room_options([
         "Scream for help",
@@ -23,7 +23,7 @@ def render_room_1():
         option = raw_input("Choose an option (q to quit): ")
         if option == "1":
             screen.clear_screen()
-            screen.print_room_notice("No one listens to you, you are on your own.")
+            screen.print_room_notice("No one listens to you, you are on your own")
             render_room_1()
         elif option == "2":
             screen.clear_screen()
@@ -102,7 +102,7 @@ def render_room_4():
     screen.print_general_screen()
     screen.print_room_description(
         "You enter the main hall. You fell a huge shade coming from nowhere\n"
-        "weaving a big axe at you. TIME TO BATTLE!"
+        "weaving a big axe at you... TIME TO BATTLE!"
     )
     raw_input("Press any key to continue...")
     battles.render_battle_1()
@@ -129,13 +129,13 @@ def render_room_5():
             screen.clear_screen()
             screen.print_room_notice(
                 "You find a trap, a clumsy deep hole full of pythons. You jump "
-                "over it."
+                "over it"
             )
             screen.print_game_over()
         elif option == "2":
             screen.clear_screen()
             screen.print_room_notice(
-                "You fall in a deep hole and get bitten by the pythons."
+                "You fall in a deep hole and get bitten by the pythons"
             )
             screen.print_game_over()
         elif option == "q":

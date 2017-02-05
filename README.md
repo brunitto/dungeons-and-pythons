@@ -2,8 +2,8 @@
 
 Explore dungeons, fight monsters and avoid traps.
 
-This is a simple RPG game written in python, as defined in exercise 36 at
-[Learn Python the Hard Way](https://learnpythonthehardway.org/book/ex36.html).
+This is a really simple RPG game written in python, as defined in exercise 36
+at [Learn Python the Hard Way](https://learnpythonthehardway.org/book/ex36.html).
 
 ## Features
 
@@ -23,12 +23,12 @@ points (DP) and gold pieces (GP)
 To start the game:
 
 1. Clone this project
-2. Change the working directory to the cloned directory
+2. Change the working directory to the project directory
 3. Execute `python play.py`
 
 ## Battle system
 
-To attack:
+When the player/monster is attacking:
 
 1. Rolls a D6 (a random value between 1 and 6)
 2. Add the player/monster attack points
@@ -37,7 +37,7 @@ To attack:
 5. If player HP < 1, game over
 6. If monster HP < 1, victory
 
-To defend:
+When the player/monster is defending:
 
 1. Rolls a D6 (a random value between 1 and 6)
 2. Add the player/monster defense points

@@ -66,7 +66,6 @@ def print_smoothly(message):
 def print_error(error):
     print error
     print
-    sys.exit(1)
 
 def print_battle_info(info):
     print info
